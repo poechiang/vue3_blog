@@ -1,0 +1,30 @@
+export const CSS_INHERIT = "inherit";
+export const CSS_INITIAL = "initial";
+export const CSS_MOZ_INITIAL = "-moz-initial";
+export const CSS_NONE = "none";
+export const CSS_UNSET = "unset";
+
+export const CSS_BLOCK = "block";
+export const CSS_CONTENTS = "contents";
+export const CSS_FLEX = "flex";
+export const CSS_FLOW_ROOT = "flow-root";
+export const CSS_GRID = "grid";
+export const CSS_INLINE = "inline";
+export const CSS_INLINE_BLOCK = "inline-block";
+export const CSS_INLINE_FLEX = "inline-flex";
+export const CSS_INILNE_GRID = "inline-grid";
+export const CSS_INLINE_TABLE = "inline-table";
+export const CSS_LIST_ITEM = "list-item";
+export const CSS_TABLE = "table";
+export const CSS_REVERT = "revert";
+export const CSS_TABLE_CAPTION = "table-caption";
+export const CSS_TABLE_CELL = "table-cell";
+export const CSS_TABLE_COLUMN = "table-column";
+export const CSS_TABLE_COLUMN_GROUP = "table-column-group";
+export const CSS_TABLE_FOOTER_GROUP = "table-footer-group";
+export const CSS_TABLE_HEADER_GROUP = "table-header-group";
+export const CSS_TABLE_ROW = "table-row";
+export const CSS_TABLE_ROW_GROUP = "table-row-group";
+
+export const CSS_BORDER_BOX = "border-box";
+export const CSS_CONTENT_BOX = "content-box";
