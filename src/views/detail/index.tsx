@@ -1,6 +1,6 @@
-import { MdViewer, OutlineAside, PageArticle } from "@/components";
-import marked from "@/lib/marked";
-import { queryArticleById } from "@/lib/request";
+import { MdViewer, OutlineAside, PageArticle } from '@/components';
+import marked from '@/lib/marked';
+import { queryArticleById } from '@/lib/request';
 import {
     BookOutlined,
     DeleteOutlined,
@@ -10,20 +10,21 @@ import {
     TwitterOutlined,
     WeiboOutlined,
     ZhihuOutlined,
-} from "@ant-design/icons-vue";
-import { BackTop, Button, Tag } from "ant-design-vue";
-import { format } from "date-fns";
-import { defineComponent, reactive, ref } from "vue";
-import { useRoute } from "vue-router";
+} from '@ant-design/icons-vue';
+import { BackTop, Tag } from 'ant-design-vue';
+import { format } from 'date-fns';
+import { defineComponent, reactive, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 const Detail = defineComponent(() => {
     const article = reactive({
-        title: "",
+        title: '',
         tags: [],
-        catagory: "",
-        content: "",
+        catagory: '',
+        content: '',
     } as ArticleData);
-    const mkdContent = ref("");
+    const mkdContent = ref('');
     const outlines = ref([]);
+    const router = useRouter();
     const route = useRoute();
 
     queryArticleById(route.params.id as string).subscribe((item) => {
@@ -45,25 +46,38 @@ const Detail = defineComponent(() => {
         >
             <header class="m-24">
                 {article.catagory ? (
-                    <aside style={{ color: "#656565" }}>
+                    <aside style={{ color: '#656565' }}>
                         <BookOutlined class="mr-4" />
                         {article.catagory}
                         <span class="f-right">
-                            <Button class="mr-8" type="primary" size="small">
+                            <a
+                                class="link primary mr-8"
+                                onClick={() =>
+                                    router.push(`/post/${route.params.id}`)
+                                }
+                            >
                                 <EditOutlined />
-                编辑
-                            </Button>
-                            <Button type="danger" size="small">
+                                编辑
+                            </a>
+                            <a
+                                class="link danger"
+                                onClick={() =>
+                                    console.log('article deleting...')
+                                }
+                            >
                                 <DeleteOutlined />
-                删除
-                            </Button>
+                                删除
+                            </a>
                         </span>
                     </aside>
                 ) : null}
-                <h1 class="art-title" style={{ fontSize: "2em", fontWeight: "normal" }}>
+                <h1
+                    class="art-title"
+                    style={{ fontSize: '2em', fontWeight: 'normal' }}
+                >
                     {article.title}
                 </h1>
-                <div class="flex-row " style={{ fontSize: ".14rem" }}>
+                <div class="flex-row " style={{ fontSize: '.14rem' }}>
                     <span>
                         {article.tags.map((item: string) => (
                             <Tag color="green" key={item}>{`${item}`}</Tag>
@@ -71,7 +85,9 @@ const Detail = defineComponent(() => {
                     </span>
                     <span class="flex-1"></span>
                     {article.createdAt ? (
-                        <span>{format(article.createdAt, "MMM dd, yyyy HH:mm:ss")}</span>
+                        <span>
+                            {format(article.createdAt, 'MMM dd, yyyy HH:mm:ss')}
+                        </span>
                     ) : null}
                 </div>
                 <div class="shares mt-48 hor-center">
@@ -92,9 +108,9 @@ const Detail = defineComponent(() => {
                     </a>
                 </div>
             </header>
-            <MdViewer>{mkdContent.value}</MdViewer>{" "}
+            <MdViewer>{mkdContent.value}</MdViewer>{' '}
             <BackTop
-                target={() => document.querySelector(".anchor-scoller-wrapper")}
+                target={() => document.querySelector('.anchor-scoller-wrapper')}
             />
         </PageArticle>
     );

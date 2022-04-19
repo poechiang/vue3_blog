@@ -1,34 +1,46 @@
-import { DraftAside, MdViewer, PageArticle, TagEditor } from "@/components";
-import marked from "@/lib/marked";
+import { DraftAside, MdViewer, PageArticle, TagEditor } from '@/components';
+import marked from '@/lib/marked';
 import {
     postArticle,
+    queryArticleById,
     queryCatagories,
     queryDrafts,
     queryTagsStatistics,
-} from "@/lib/request";
-import { deleteArticle } from "@/lib/request/index";
-import { SearchOutlined } from "@ant-design/icons-vue";
-import { AutoComplete, Button, Card, Input, Tag } from "ant-design-vue";
-import { debounce, findIndex, indexOf } from "lodash";
-import { defineComponent, reactive, ref, watch } from "vue";
-import { useRouter } from "vue-router";
+} from '@/lib/request';
+import { deleteArticle } from '@/lib/request/index';
+import { SearchOutlined } from '@ant-design/icons-vue';
+import { AutoComplete, Button, Card, Input, Tag } from 'ant-design-vue';
+import { debounce, findIndex, indexOf } from 'lodash';
+import { defineComponent, onUnmounted, reactive, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 const Post = defineComponent(() => {
-    const artCache = sessionStorage.getItem("temp_art_data");
-    const article = reactive(
-    (artCache
-        ? JSON.parse(artCache)
-        : {
-            title: "",
-            tags: [],
-            catagory: "",
-            content: "",
-        }) as ArticleData
-    );
-    const mkdContent = ref(marked(article.content));
+    const artCache = sessionStorage.getItem('temp_art_data');
+    const emptyArtData = {
+        title: '',
+        tags: [],
+        catagory: '',
+        content: '',
+    };
     const catagories = ref([]);
     const existTagList = ref([]);
     const drafts = reactive({ list: [], loading: true });
+
     const router = useRouter();
+    const route = useRoute();
+    const article = reactive(
+        (artCache ? JSON.parse(artCache) : emptyArtData) as ArticleData
+    );
+    const mkdContent = ref(marked(article.content));
+    route.params.id &&
+        queryArticleById(route.params.id as string).subscribe((item) => {
+            article.title = item.title;
+            article.tags.push(...item.tags);
+            article.catagory = item.catagory;
+            article.content = item.content;
+            article.createdAt = new Date(item.createdAt);
+            mkdContent.value = marked(item.content);
+        });
+
     queryDrafts().subscribe((list) => {
         drafts.list.push(...list);
         drafts.loading = false;
@@ -51,16 +63,16 @@ const Post = defineComponent(() => {
     watch(
         article,
         (val) => {
-            sessionStorage.setItem("temp_art_data", JSON.stringify(val));
+            sessionStorage.setItem('temp_art_data', JSON.stringify(val));
             updateViewer(marked(val.content));
         },
         { deep: true }
     );
-
+    onUnmounted(() => sessionStorage.removeItem('temp_art_data'));
     const handlePost = (isDraft?: boolean) => {
         article.draft = !!isDraft;
         postArticle(article).subscribe((resp) => {
-            sessionStorage.removeItem("temp_art_data");
+            sessionStorage.removeItem('temp_art_data');
             router.push(`/articles/${isDraft ? article._id : resp._id}`);
         });
     };
@@ -71,7 +83,7 @@ const Post = defineComponent(() => {
             header={false}
             aside={
                 <DraftAside
-                    width={"360px"}
+                    width={'360px'}
                     list={drafts.list}
                     loading={drafts.loading}
                     open={(draft) => {
@@ -97,7 +109,7 @@ const Post = defineComponent(() => {
                 <div class="flex-row mb-12">
                     <AutoComplete
                         class="cata-searcher flex-1 mr-8"
-                        style={{ width: "4rem" }}
+                        style={{ width: '4rem' }}
                         value={article.catagory}
                         placeholder="输入或选择主题"
                         onSelect={(e) => (article.catagory = e.target.value)}
@@ -106,33 +118,39 @@ const Post = defineComponent(() => {
                         suffixIcon={<SearchOutlined />}
                     ></AutoComplete>
                     <Input
-                        class="art-title flex-2"
+                        class="art-title flex-2 mr-8"
                         placeholder="文档的标题"
                         value={article.title}
-                        onChange={({ target: { value } }) => (article.title = value)}
+                        onChange={({ target: { value } }) =>
+                            (article.title = value)
+                        }
                     />
-                    <Button
-                        type="link"
-                        style={{ borderRadius: "2px 0 0 2px" }}
-                        onClick={() => handlePost(true)}
-                        disabled={!article.title || !article.content}
-                    >
-            暂存
-                    </Button>
+                    {route.params.id ? null : (
+                        <Button
+                            type="link"
+                            style={{ borderRadius: '2px 0 0 2px' }}
+                            onClick={() => handlePost(true)}
+                            disabled={!article.title || !article.content}
+                        >
+                            暂存
+                        </Button>
+                    )}
                     <Button
                         type="primary"
                         onClick={() => handlePost()}
-                        style={{ borderRadius: "0 2px 2px 0" }}
+                        style={{ borderRadius: '0 2px 2px 0' }}
                         disabled={!article.title || !article.content}
                     >
-            发布
+                        发布
                     </Button>
                 </div>
                 <div class="flex-row mb-4">
                     <TagEditor
                         tags={article.tags}
                         added={(items) => {
-                            article.tags = [...article.tags, ...items].filter((tag) => !!tag);
+                            article.tags = [...article.tags, ...items].filter(
+                                (tag) => !!tag
+                            );
                             // 检查建议列表，选中匹配标签
                             existTagList.value.forEach((tag) => {
                                 if (indexOf(items, tag.title) >= 0) {
@@ -155,7 +173,10 @@ const Post = defineComponent(() => {
                 <div class="flex-row --flex-wrap mb-12">
                     {existTagList.value.map((item) => (
                         <Tag.CheckableTag
-                            checked={item.checked || indexOf(article.tags, item.title) >= 0}
+                            checked={
+                                item.checked ||
+                                indexOf(article.tags, item.title) >= 0
+                            }
                             onChange={(value) => {
                                 console.log(value);
                                 item.checked = value;
@@ -164,7 +185,10 @@ const Post = defineComponent(() => {
                                     article.tags.push(item.title);
                                     item.count += 1;
                                 } else {
-                                    const index = indexOf(article.tags, item.title);
+                                    const index = indexOf(
+                                        article.tags,
+                                        item.title
+                                    );
                                     console.log(index);
                                     article.tags.splice(index, 1);
                                     item.count -= 1;
@@ -173,7 +197,8 @@ const Post = defineComponent(() => {
                             key={item.title}
                         >
                             {`${item.title} (${
-                                item.count + (indexOf(article.tags, item.title) >= 0 ? 1 : 0)
+                                item.count +
+                                (indexOf(article.tags, item.title) >= 0 ? 1 : 0)
                             })`}
                         </Tag.CheckableTag>
                     ))}

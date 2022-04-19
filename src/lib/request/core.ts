@@ -1,15 +1,15 @@
-import { isString, merge } from "lodash";
+import { isString, merge } from 'lodash';
 
-const domain = "http://localhost:9999";
-const parseUrl = (url: string) => [domain, ...url.split("/")].join("/");
+const domain = 'http://localhost:9999';
+const parseUrl = (url: string) => [domain, ...url.split('/')].join('/');
 const toQueryString = (query) => {
-    if (!query) return "";
-    if (isString(query)) return "?" + query;
+    if (!query) return '';
+    if (isString(query)) return '?' + query;
     return (
-        "?" +
-    Object.entries(query)
-        .map(([k, v]) => `${k}=${v}`)
-        .join("&")
+        '?' +
+        Object.entries(query)
+            .map(([k, v]) => `${k}=${v}`)
+            .join('&')
     );
 };
 export const get = <T = any>(
@@ -21,11 +21,11 @@ export const get = <T = any>(
             parseUrl(url) + toQueryString(query || null),
             merge(options || ({} as any), {
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "x-requested-with": "XMLHttpRequest",
+                    'Content-Type': 'application/json',
+                    'x-requested-with': 'XMLHttpRequest',
                 }),
-                mode: "cors",
-                method: "GET",
+                mode: 'cors',
+                method: 'GET',
             })
         ).then((resp) => resp.json());
 
@@ -38,11 +38,11 @@ export const post = <T = any>(
             parseUrl(url),
             merge(options || ({} as any), {
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "x-requested-with": "XMLHttpRequest",
+                    'Content-Type': 'application/json',
+                    'x-requested-with': 'XMLHttpRequest',
                 }),
-                mode: "cors",
-                method: "POST",
+                mode: 'cors',
+                method: 'POST',
                 body: JSON.stringify(data),
             })
         ).then((resp) => resp.json());
@@ -53,13 +53,13 @@ export const del = <T = any>(
     options?: RequestInit
 ): Promise<ResponseBody<T>> =>
         fetch(
-            parseUrl(url) + "/" + id,
+            parseUrl(url) + '/' + id,
             merge(options || ({} as any), {
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "x-requested-with": "XMLHttpRequest",
+                    'Content-Type': 'application/json',
+                    'x-requested-with': 'XMLHttpRequest',
                 }),
-                mode: "cors",
-                method: "DELETE",
+                mode: 'cors',
+                method: 'DELETE',
             })
         ).then((resp) => resp.json());

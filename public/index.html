@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <style>
-      #wmark-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 100050;
-        pointer-events: none;
-        opacity: 0.1;
-        user-select: none;
-      }
-      #wmark-wrapper .inner {
-        position: absolute;
-        width: 200vw;
-        height: 200vh;
-        display: flex;
-        flex-wrap: wrap;
-        top: 0;
-        left: 0;
-        margin: -50vh -50vw;
-      }
-      #wmark-wrapper .inner .mark {
-        transform: rotate(-30deg);
-        line-height: 10vw;
-        width: 10vw;
-        display: inline-block;
-        white-space: nowrap;
-      }
-    </style>
-  </head>
-  <body>
-    <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
-        properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <style>
+            #wmark-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 100050;
+                pointer-events: none;
+                opacity: 0.1;
+                user-select: none;
+            }
+            #wmark-wrapper .inner {
+                position: absolute;
+                width: 200vw;
+                height: 200vh;
+                display: flex;
+                flex-wrap: wrap;
+                top: 0;
+                left: 0;
+                margin: -50vh -50vw;
+            }
+            #wmark-wrapper .inner .mark {
+                transform: rotate(-30deg);
+                line-height: 10vw;
+                width: 10vw;
+                display: inline-block;
+                white-space: nowrap;
+            }
+        </style>
+    </head>
+    <body>
+        <noscript>
+            <strong>
+                We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't
+                work properly without JavaScript enabled. Please enable it to
+                continue.
+            </strong>
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
 
-    <div id="wmark-wrapper"></div>
-    <script lang="ts">
-      window.onload = () => {
-        const wrapper = document.querySelector("#wmark-wrapper");
-        const inner = document.createElement("div");
-        inner.className = "inner";
-        for (let i = 0; i < 300; i++) {
-          const mark = document.createElement("span");
-          mark.className = "mark";
-          mark.innerHTML = `Jeffery &copy; ${new Date().getFullYear()}`;
-          inner.appendChild(mark);
-        }
-        wrapper.appendChild(inner);
-      };
-    </script>
-  </body>
+        <div id="wmark-wrapper"></div>
+        <script lang="ts">
+            window.onload = () => {
+                const wrapper = document.querySelector('#wmark-wrapper');
+                const inner = document.createElement('div');
+                inner.className = 'inner';
+                for (let i = 0; i < 300; i++) {
+                    const mark = document.createElement('span');
+                    mark.className = 'mark';
+                    mark.innerHTML = `Jeffery &copy; ${new Date().getFullYear()}`;
+                    inner.appendChild(mark);
+                }
+                wrapper.appendChild(inner);
+            };
+        </script>
+    </body>
 </html>

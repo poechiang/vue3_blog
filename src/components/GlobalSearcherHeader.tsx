@@ -1,16 +1,19 @@
-import { AutoComplete, Input } from "ant-design-vue";
-import { defineComponent, Fragment, h as createElement } from "vue";
-import { useStore } from "vuex";
+import { AutoComplete, Input } from 'ant-design-vue';
+import { defineComponent, Fragment, h as createElement } from 'vue';
+import { useStore } from 'vuex';
 
 const React = { createElement, Fragment };
 
 const GlobalSearcherHeader = defineComponent(
     ({ options, defaultValue, value, placeholder }: any, { emit }) => {
         const store = useStore();
-        const handleSelect = (value: string) => emit("select", value);
-        const handleSearch = (value: string) => emit("search", value);
-        const handleFocus = () => store.commit("filterBanner");
-        const handleBlur = () => store.commit("cancelFilterBanner");
+        const handleSelect = (value: string) => emit('select', value);
+        const handleSearch = (value: string) => emit('search', value);
+        const handleFocus = () => {
+            console.log('filter banner ...');
+            store.commit('filterBanner');
+        };
+        const handleBlur = () => store.commit('cancelFilterBanner');
         return () => (
             <header class="global-searcher-wrapper">
                 <AutoComplete
@@ -25,12 +28,15 @@ const GlobalSearcherHeader = defineComponent(
                 >
                     <Input.Search
                         size="large"
-                        placeholder={placeholder || "标题、标签、关键字"}
+                        placeholder={placeholder || '标题、标签、关键字'}
                     />
                     {{
                         options: () =>
                             options?.map(({ category }) => (
-                                <AutoComplete.Option key={category} title={category} />
+                                <AutoComplete.Option
+                                    key={category}
+                                    title={category}
+                                />
                             )),
                     }}
                 </AutoComplete>

@@ -1,21 +1,23 @@
-import { computed, defineComponent } from "vue";
-import { useStore } from "vuex";
+import { computed, defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
-export default defineComponent(() => () => {
-    const classes = ["banner-wrapper"];
-
+export default defineComponent(() => {
     const store = useStore();
-
-    const GlobalSearcherFocused = computed(() => {
-        return store.state.bannerBlur;
-    });
-    if (GlobalSearcherFocused) {
-        classes.push("--focused");
-    }
-    return (
-        <>
-            <div class={classes.join(" ")} />
-            <router-view />
-        </>
+    const globalSearcherFocused = computed(
+        (): boolean => store.state.bannerBlur
     );
+
+    return () => {
+        const classes = ['banner-wrapper'];
+
+        if (globalSearcherFocused.value) {
+            classes.push('--focused');
+        }
+        return (
+            <>
+                <div class={classes.join(' ')} />
+                <router-view />
+            </>
+        );
+    };
 });

@@ -1,108 +1,161 @@
 @display: block, flex, inline-block, inline-flex, inline, table, table-cell,
-  none, init, unset;
+    none, init, unset;
 each(@display,{
-  .dp-@{value}{
-    display:@value;
-  }
+    .dp-@{value}{
+        display:@value;
+    }
 });
 
 each(range(0,100),{
-  .m-@{value}{
-    margin:(@value / 100rem);
-  }
-  .ma-@{value}{
-    margin:(@value / 100rem) auto;
-  }
-  .ml-@{value}{
-    margin-left:(@value / 100rem);
-  }
-  .mt-@{value}{
-    margin-top:(@value / 100rem);
-  }
-  .mr-@{value}{
-    margin-right:(@value / 100rem);
-  }
-  .mb-@{value}{
-    margin-bottom:(@value / 100rem);
-  }
-  .mh-@{value}{
-    margin-left:(@value / 100rem);
-    margin-right:(@value / 100rem);
-  }
-  .mv-@{value}{
-    margin-top:(@value / 100rem);
-    margin-bottom:(@value / 100rem);
-  }
-  .p-@{value}{
-    padding:(@value / 100rem);
-  }
-  .pl-@{value}{
-    padding-left:(@value / 100rem);
-  }
-  .pt-@{value}{
-    padding-top:(@value / 100rem);
-  }
-  .pr-@{value}{
-    padding-right:(@value / 100rem);
-  }
-  .pb-@{value}{
-    padding-bottom:(@value / 100rem);
-  }
+    .m-@{value}{
+        margin:(@value / 100rem);
+    }
+    .ma-@{value}{
+        margin:(@value / 100rem) auto;
+    }
+    .ml-@{value}{
+        margin-left:(@value / 100rem);
+    }
+    .mt-@{value}{
+        margin-top:(@value / 100rem);
+    }
+    .mr-@{value}{
+        margin-right:(@value / 100rem);
+    }
+    .mb-@{value}{
+        margin-bottom:(@value / 100rem);
+    }
+    .mh-@{value}{
+        margin-left:(@value / 100rem);
+        margin-right:(@value / 100rem);
+    }
+    .mv-@{value}{
+        margin-top:(@value / 100rem);
+        margin-bottom:(@value / 100rem);
+    }
+    .p-@{value}{
+        padding:(@value / 100rem);
+    }
+    .pl-@{value}{
+        padding-left:(@value / 100rem);
+    }
+    .pt-@{value}{
+        padding-top:(@value / 100rem);
+    }
+    .pr-@{value}{
+        padding-right:(@value / 100rem);
+    }
+    .pb-@{value}{
+        padding-bottom:(@value / 100rem);
+    }
 });
 
 @flexDirections: row, column;
 
 each(@flexDirections,{
-  .flex-@{value}{
-    display: flex;
-    flex-direction: @value;
-    &.--reverse{
-      flex-direction: (@value)-reverse;
+    .flex-@{value}{
+        display: flex;
+        flex-direction: @value;
+        &.--reverse{
+            flex-direction: (@value)-reverse;
+        }
+        &.--flex-wrap{
+            flex-wrap:wrap;
+        }
     }
-    &.--flex-wrap{
-      flex-wrap:wrap;
-    }
-  }
 });
+
 each(range(10),{
-  .flex-@{value}{
-    flex:@value;
-  }
+    .flex-@{value}{
+        flex:@value;
+    }
 });
+
 .--line-center {
-  align-items: center;
+    align-items: center;
 }
 
-@positions:relative,absolute;
+@positions: relative, absolute;
+
 each(@positions,{
-  .pos-@{value}{
-    position: @value;
-  }
-})
+    .pos-@{value}{
+        position: @value;
+    }
+});
 
-@overflows:auto,scroll,hidden,initial,inherit,unset;
+@overflows: hidden, visible, scroll, auto;
 each(@overflows,{
-  .of-@{value}{
-    overflow:@value;
-    &-x{
-      overflow-x: @value;
+    .of-@{value}{
+        overflow:@value;
+        &-x{
+            overflow-x: @value;
+        }
+        &-y{
+            overflow-y: @value;
+        }
     }
-    &-y{
-      overflow-y: @value;
-    }
-  }
-})
+});
 
-@horizontal:left,center,right,initial,inherit,unset;
+@horizontal: left, right, center;
 each(@horizontal,{
-  .hor-@{value}{
-    text-align:@value;
-  }
-})
+    .hor-@{value}{
+        text-align:@value;
+    }
+});
 
-@floats:left,none,right,inital,inherit,unset;
+@floats: left, none, right, inherit, initial;
 each(@floats,{
-  .f-@{value}{
-    float:@value;
-  }
-})
+    .f-@{value}{
+        float:@value;
+    }
+});
+
+.link {
+    color: #999;
+    display: inline;
+    padding: 0;
+
+    &:link {
+        color: #999;
+    }
+
+    &:hover {
+        color: #888;
+    }
+
+    &:active {
+        color: #616161;
+    }
+
+    &.danger {
+        color: #ff7875;
+
+        &:link {
+            color: #ff7875;
+        }
+
+        &:hover {
+            color: #ffa39e;
+        }
+
+        &:active {
+            color: #d9595b;
+        }
+    }
+
+    &.primary {
+        color: #1890ff;
+
+        &:link {
+            color: #1890ff;
+        }
+
+        &:hover {
+            color: #40a9ff;
+        }
+
+        &:active {
+            color: #096dd9;
+        }
+    }
+}
