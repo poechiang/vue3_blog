@@ -1,24 +1,26 @@
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue(), vueJsx()],
     resolve: {
-        alias: [
-            { find: '::root', replacement: 'src' },
-            { find: '@pages', replacement: 'src/pages' },
-            {
-                find: '@assets',
-                replacement: 'src/assets',
-            },
-        ],
+        alias: {
+            '@pages': resolve(__dirname, './src/pages'),
+            '@common': resolve(__dirname, './src/common'),
+            '@components': resolve(__dirname, './src/components'),
+            '@styles': resolve(__dirname, './src/assets/styles'),
+        },
+
+        extensions: ['less', '.js', '.vue', '.json', '.ts', '.tsx'],
     },
     server: {
         host: '127.0.0.1',
         port: 3002,
         strictPort: true,
+        hmr: { clientPort: 3002 },
         open: true,
         proxy: {
             '^/api/.*': {

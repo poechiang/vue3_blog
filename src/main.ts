@@ -1,5 +1,6 @@
-import { createApp } from 'vue'
-import App from './App'
-import './assets/styles/style.less'
+import { router } from '@pages/router';
+// import '@styles/style.less';
+import { createApp } from 'vue';
+import App from './App';
 
-createApp(App).mount('#app')
+createApp(App).use(router).mount('#app');

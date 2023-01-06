@@ -14,11 +14,12 @@
         "lib": ["ESNext", "DOM"],
         "skipLibCheck": true,
         "paths": {
-            "::root/*": ["src/*"],
             "@pages/*": ["src/pages/*"],
+            "@common/*": ["src/common/*"],
+            "@components/*": ["src/components/*"],
             "@styles/*": ["src/assets/styles/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "test.ts", "test.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
