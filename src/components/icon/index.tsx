@@ -1,6 +1,9 @@
 import { FunctionalComponent } from 'vue';
-export const Icon: FunctionalComponent<IconProp> = (props, content) => {
+export const Icon: FunctionalComponent<BaseIconProp> = (props, content) => {
     const { type } = props;
+    if (!type) {
+        error;
+    }
     return (
         <svg class="icon" aria-hidden="true">
             <use xlinkHref={`#icon-${type}`}></use>
@@ -8,7 +11,7 @@ export const Icon: FunctionalComponent<IconProp> = (props, content) => {
     );
 };
 
-export const SearchIcon: FunctionalComponent = () => (
+export const SearchIcon: FunctionalComponent<IconProp> = () => (
     <svg class="icon" aria-hidden="true">
         <use xlinkHref="#icon-search"></use>
     </svg>
