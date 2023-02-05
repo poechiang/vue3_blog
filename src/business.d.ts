@@ -1,4 +1,3 @@
-declare type Loose<T = any> = Record<T>;
 declare interface IArticle {
     id: string;
     catagory?: string;

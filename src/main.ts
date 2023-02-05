@@ -1,5 +1,5 @@
 import { router } from '@pages/router';
-// import '@styles/style.less';
+// import '@styles/index.less';
 import { createApp } from 'vue';
 import App from './App';
 

@@ -6,11 +6,8 @@ export const Articles: FunctionalComponent = () => {
     const router = useRouter();
 
     return (
-        <div class="flexable">
-            <aside>{/* <Chronicle /> */}</aside>
-            <section>
-                <ArticleList />
-            </section>
-        </div>
+        <section>
+            <ArticleList />
+        </section>
     );
 };

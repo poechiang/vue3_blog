@@ -11,10 +11,18 @@ export default defineConfig({
             '@pages': resolve(__dirname, './src/pages'),
             '@common': resolve(__dirname, './src/common'),
             '@components': resolve(__dirname, './src/components'),
+            '@images': resolve(__dirname, './src/assets/images'),
             '@styles': resolve(__dirname, './src/assets/styles'),
         },
 
-        extensions: ['less', '.js', '.vue', '.json', '.ts', '.tsx'],
+        extensions: ['less', '.js', '.vue', '.json', '.ts', '.d.ts', '.tsx', '.less'],
+    },
+    css: {
+        preprocessorOptions: {
+            less: {
+                javascriptEnabled: true,
+            },
+        },
     },
     server: {
         host: '127.0.0.1',

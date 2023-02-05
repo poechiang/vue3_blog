@@ -1,4 +1,5 @@
 import { isString, isUndefined, merge, pickBy } from 'lodash';
+import { Loose } from 'src/sources';
 import { snake } from './utils';
 
 const parseUrl = (url: string) => [...url.split('/')].join('/');
