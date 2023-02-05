@@ -5,6 +5,7 @@
     --c-btn-back: #f9f9f9;
     --c-divider: #0000001a;
     --c-border: #0000001a;
+    --c-field-back: #f0f0f0;
 }
 .dark-theme-root {
     --c-fore: rgba(255, 255, 255, 0.87);
@@ -13,6 +14,7 @@
     --c-btn-back: #1a1a1a;
     --c-divider: #ffffff1a;
     --c-border: #ffffff1a;
+    --c-field-back: #3b3b3b;
 }
 :root {
     color-scheme: light dark;
@@ -32,9 +34,13 @@
 }
 
 @base-border-radius: 6px;
-@color-base-border: var(--c-border);
+
 // colors
+@color-foreground: var(--c-fore);
+@color-base-border: var(--c-border);
 @color-primary: #1890ff;
+@color-field-fore: @color-foreground;
+@color-field-back: var(--c-field-back);
 
 // link
 @color-link-plain: var(--c-fore);
