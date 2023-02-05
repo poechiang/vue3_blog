@@ -2,7 +2,7 @@ import { get } from '@common/http';
 import { loggerWithTags } from '@jeffchi/logger';
 
 import * as fns from 'date-fns';
-import { IArticle } from 'src/sources';
+
 import { defineComponent, onBeforeMount, ref } from 'vue';
 
 const { log } = loggerWithTags('article');
@@ -34,7 +34,9 @@ export const ArticleList = defineComponent({
                 <ul class={'art-list-wrap'}>
                     {data.value?.map((article) => (
                         <li class="art-list-item ">
-                            <h3 class="art-list-item-title">{article.title}</h3>
+                            <h3 class="art-list-item-title">
+                                <a href="">{article.title}</a>
+                            </h3>
 
                             <div class="created-at">{fns.format(article.createdAt as Date, 'MMM dd, yyyy HH:mm:ss')}</div>
                         </li>
