@@ -1,5 +1,6 @@
 declare interface IArticle {
     id: string;
+    _id: string;
     catagory?: string;
     title?: string;
     content?: string;

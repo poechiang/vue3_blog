@@ -4,6 +4,7 @@ const cache: Loose = {};
 const { warn } = loggerWithTags('ICON');
 export interface IconProps extends Loose, InputHTMLAttributes {
     type: string;
+    originColor?: boolean;
 }
 export const createFromIconfontCN = (conf: { scriptUrl: string }): FunctionalComponent<IconProps> => {
     const { scriptUrl } = conf;
@@ -21,9 +22,14 @@ export const createFromIconfontCN = (conf: { scriptUrl: string }): FunctionalCom
         (head || body).appendChild(scriptEl);
         cache[scriptUrl] = true;
     }
-    return ({ type, ...props }: IconProps) => {
+    return ({ type, originColor, ...props }: IconProps) => {
         const className = props.class?.split(' ') || [];
+        if (originColor) {
+            className.unshift('origin-color');
+        }
         className.unshift('icon', type);
-        return h('svg', { class: className.join(' '), 'aria-hidden': true, ...props }, h('use', { 'xlink:href': `#icon-${type}` }));
+        const useEl = h('use', { 'xlink:href': `#icon-${type}` });
+        const svgEl = h('svg', { 'aria-hidden': true }, useEl);
+        return h('span', { class: className.join(' '), ...props }, svgEl);
     };
 };

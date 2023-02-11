@@ -4,8 +4,11 @@
     --c-block: #ffffff;
     --c-btn-back: #f9f9f9;
     --c-divider: #0000001a;
-    --c-border: #0000001a;
+    --c-border: #00000010;
     --c-field-back: #f0f0f0;
+    --c-icon-fill: #9d9d9d;
+    --c-code-wrap: #0116270f;
+    --c-table-border: #e0e0e0;
 }
 .dark-theme-root {
     --c-fore: rgba(255, 255, 255, 0.87);
@@ -15,7 +18,11 @@
     --c-divider: #ffffff1a;
     --c-border: #ffffff1a;
     --c-field-back: #3b3b3b;
+    --c-icon-fill: #ffffff;
+    --c-code-wrap: #ffffff0f;
+    --c-table-border: #424242;
 }
+
 :root {
     color-scheme: light dark;
     .light-theme-root();
@@ -33,21 +40,29 @@
     }
 }
 
-@base-border-radius: 6px;
+@border-radius-base: 6px;
 
 // colors
 @color-foreground: var(--c-fore);
+@color-field-fore: @color-foreground;
 @color-base-border: var(--c-border);
 @color-primary: #1890ff;
-@color-field-fore: @color-foreground;
+@color-placeholder: var(--c-placeholder);
 @color-field-back: var(--c-field-back);
+@color-icon-fill: var(--c-icon-fill);
+
+// code
+@color-code-wrap: var(--c-code-wrap);
+
+// table
+@color-table-border: var(--c-table-border);
 
 // link
 @color-link-plain: var(--c-fore);
-@color-link-theme: @color-primary;
-@color-link-hover: lighten(@color-primary, 20%);
-@color-link-active: darken(@color-primary, 20%);
+@color-link-theme: var(--c-link-theme);
+@color-link-hover: var(--c-link-hover);
+@color-link-active: var(--c-link-active);
 
 // divider
-@color-divider: var(--color-divider);
+@color-divider: var(--c-divider);
 @color-summary: #00000017;

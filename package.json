@@ -10,9 +10,11 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@jeffchi/logger": "2",
+        "@jeffchi/logger": "^3.0.0",
         "date-fns": "^2.29.3",
+        "highlight.js": "^11.7.0",
         "lodash": "^4.17.21",
+        "marked": "^4.2.12",
         "pinia": "^2.0.23",
         "vue": "^3.2.37",
         "vue-hooks": "^0.3.2",
@@ -20,6 +22,7 @@
     },
     "devDependencies": {
         "@types/lodash": "^4.14.186",
+        "@types/marked": "^4.0.8",
         "@types/node": "^18.11.18",
         "@vitejs/plugin-vue": "^3.0.0",
         "@vitejs/plugin-vue-jsx": "^2.0.0",

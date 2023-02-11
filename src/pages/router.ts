@@ -7,13 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/articles',
-        name: 'Articles',
-        component: () => import('@pages/Articles').then((m) => m.Articles),
+        component: () => import('@pages/articles').then((m) => m.Articles),
     },
     {
         path: '/articles/:id',
-        name: 'Detail',
-        component: () => import('@pages/NotFound').then((m) => m.NotFound),
+        component: () => import('@pages/articles').then((m) => m.View),
     },
     {
         path: '/about',
@@ -23,11 +21,6 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/post/:id?',
         name: 'Post',
-        component: () => import('@pages/NotFound').then((m) => m.NotFound),
-    },
-    {
-        path: '/articles/:id',
-        name: 'Detail',
         component: () => import('@pages/NotFound').then((m) => m.NotFound),
     },
     {

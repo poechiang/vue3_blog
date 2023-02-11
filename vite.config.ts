@@ -12,6 +12,7 @@ export default defineConfig({
             '@common': resolve(__dirname, './src/common'),
             '@components': resolve(__dirname, './src/components'),
             '@images': resolve(__dirname, './src/assets/images'),
+            '@libs': resolve(__dirname, './src/libs'),
             '@styles': resolve(__dirname, './src/assets/styles'),
         },
 

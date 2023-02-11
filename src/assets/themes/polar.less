@@ -1,6 +1,18 @@
 @import '../styles/index.less';
 @import './../../components/styles/index.less';
 @color-primary: #52c41a;
-:root {
+
+.light-theme-root {
     --c-primary: @color-primary;
+    --c-link-theme: @color-primary;
+    --c-placeholder: fade(@color-primary, 80%);
+}
+.dark-theme-root {
+    --c-primary: @color-primary;
+    --c-link-theme: lighten(@color-primary, 30%);
+    --c-placeholder: fade(@color-primary, 40%);
+}
+:root {
+    --c-link-hover: lighten(@color-primary, 20%);
+    --c-link-active: darken(@color-primary, 20%);
 }

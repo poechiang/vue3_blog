@@ -17,6 +17,8 @@
             "@pages/*": ["src/pages/*"],
             "@common/*": ["src/common/*"],
             "@components/*": ["src/components/*"],
+            "@images/*": ["src/assets/images/*"],
+            "@libs/*": ["src/libs/*"],
             "@styles/*": ["src/assets/styles/*"]
         }
     },

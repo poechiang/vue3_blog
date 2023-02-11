@@ -1,9 +1,13 @@
+import { PageFooter } from '@components/PageFooter';
 import { PageHeader } from '@components/PageHeader';
-import { FunctionalComponent } from 'vue';
+import { FunctionalComponent, Suspense } from 'vue';
 const App: FunctionalComponent = () => (
     <>
         <PageHeader />
-        <router-view />
+        <Suspense>
+            <router-view />
+        </Suspense>
+        <PageFooter />
     </>
 );
 export default App;

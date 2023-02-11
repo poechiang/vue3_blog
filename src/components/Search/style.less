@@ -1,23 +1,27 @@
 @import '../styles/variable.less';
 @import '../styles/mixin.less';
+@color-search-icon-fill: @color-icon-fill;
 .search-wrap {
     display: inline-block;
     position: relative;
     height: @input-height;
     font-size: 0;
-
-    border-radius: @input-border-radius;
+    width: fit-content;
+    height: fit-content;
+    border-radius: @border-radius-input;
     input[type='search'] {
         .input();
         padding-right: 18px;
+        border-radius: inherit;
     }
 
     // icon
-    svg.icon {
+    .icon {
         position: absolute;
         right: 5px;
         top: 50%;
         margin-top: -0.5em;
         font-size: 14px;
+        color: @color-search-icon-fill;
     }
 }
